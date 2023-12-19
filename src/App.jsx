@@ -1,15 +1,17 @@
 import './App.css'
-import { Body } from './pages/Body/body';
+import { Body } from './pages/Body/Body';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PageNavbar } from './common/PageNavbar/PageNavbar';
 
 
 function App() {
 
   return (
     <>
-      <Body/>
+      <PageNavbar />
+      <Body />
     </>
   )
 }

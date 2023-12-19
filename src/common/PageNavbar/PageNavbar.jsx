@@ -25,7 +25,9 @@ export const PageNavbar = () => {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home">Trail of Bombs</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <img src='./src/assets/img/logo.png' alt='Logo' className='logo-navbar'></img>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -48,13 +50,13 @@ export const PageNavbar = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className='offcanvas-design'>
-              <label htmlFor="email">Email:</label>
-              <input type="text" id="email" name="email" />
-              <label htmlFor="password">Password:</label>
-              <input type="password" id="password" name="password" />
-              <Button variant="primary" type="submit">
-                Login
-              </Button>
+            <label htmlFor="email">Email:</label>
+            <input type="text" id="email" name="email" />
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" name="password" />
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
@@ -64,17 +66,17 @@ export const PageNavbar = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className='offcanvas-design'>
-              <label htmlFor="name">Name:</label>
-              <input type="text" id="name" name="name" />
-              <label htmlFor="username">Username:</label>
-              <input type="text" id="username" name="username" />
-              <label htmlFor="email">Email:</label>
-              <input type="text" id="email" name="email" />
-              <label htmlFor="password">Password:</label>
-              <input type="password" id="password" name="password" />
-              <Button variant="primary" type="submit">
-                Register
-              </Button>
+            <label htmlFor="name">Name:</label>
+            <input type="text" id="name" name="name" />
+            <label htmlFor="username">Username:</label>
+            <input type="text" id="username" name="username" />
+            <label htmlFor="email">Email:</label>
+            <input type="text" id="email" name="email" />
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" name="password" />
+            <Button variant="primary" type="submit">
+              Register
+            </Button>
           </div>
         </Offcanvas.Body>
       </Offcanvas>

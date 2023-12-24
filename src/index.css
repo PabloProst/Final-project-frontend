@@ -30,6 +30,9 @@ body {
   height: 100vh;
 
   background-color: red;
+  font-family: 'Bangers';
+
+  overflow-x: hidden;
 }
 
 h1 {

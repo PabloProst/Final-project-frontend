@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './PageNavbar.css';
-import { registerUser } from '../../services/apiCalls';
+import { logUser, registerUser } from '../../services/apiCalls';
 
 export const PageNavbar = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -31,18 +31,36 @@ export const PageNavbar = () => {
     const password = e.target.elements.password.value;
 
     try {
-        const response = await registerUser({
-            name,
-            username,
-            email,
-            password,
-        });
+      const response = await registerUser({
+        name,
+        username,
+        email,
+        password,
+      });
 
-        console.log(response.data); 
+      console.log(response.data);
     } catch (error) {
-        console.error('Error during registration:', error);
+      console.error('Error during registration:', error);
     }
-};
+  };
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+
+    try {
+      const response = await logUser({
+        email,
+        password,
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
+  };
 
   return (
     <>
@@ -54,7 +72,7 @@ export const PageNavbar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="#link">About</Nav.Link>
               <Nav.Link href="#link">Ranking</Nav.Link>
               <NavDropdown title="Account" id="basic-nav-dropdown">
@@ -67,44 +85,59 @@ export const PageNavbar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Offcanvas show={showLogin} onHide={() => setShowLogin(false)} placement="end">
+      <Offcanvas show={showLogin} onHide={() => setShowLogin(false)} placement="end" className="design-offcanvas">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Login</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className='offcanvas-design'>
-            <label htmlFor="email">Email:</label>
-            <input type="text" id="email" name="email" />
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" />
-            <Button variant="primary" type="submit">
-              Login
-            </Button>
+            <form onSubmit={handleLoginSubmit}>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">EMAIL:</label>
+                <input type="text" id="email" name="email" className="form-control" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">PASSWORD:</label>
+                <input type="password" id="password" name="password" className="form-control" />
+              </div>
+              <Button variant="warning" type="submit" className="d-block mx-auto border border-dark">
+                LOGIN
+              </Button>
+            </form>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
-      <Offcanvas show={showRegister} onHide={() => setShowRegister(false)} placement="end">
+      <Offcanvas show={showRegister} onHide={() => setShowRegister(false)} placement="end" className="design-offcanvas">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Register</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className='offcanvas-design'>
-          <form onSubmit={handleRegisterSubmit}>
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" name="name" />
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" />
-            <label htmlFor="email">Email:</label>
-            <input type="text" id="email" name="email" />
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" />
-            <Button variant="primary" type="submit">
-              Register
-            </Button>
+            <form onSubmit={handleRegisterSubmit}>
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">NAME:</label>
+                <input type="text" id="name" name="name" className="form-control" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="username" className="form-label">USERNAME:</label>
+                <input type="text" id="username" name="username" className="form-control" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">EMAIL:</label>
+                <input type="text" id="email" name="email" className="form-control" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">PASSWORD:</label>
+                <input type="password" id="password" name="password" className="form-control" />
+              </div>
+              <Button variant="warning" type="submit" className="d-block mx-auto border border-dark">
+                REGISTER
+              </Button>
             </form>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
+
     </>
   );
 };

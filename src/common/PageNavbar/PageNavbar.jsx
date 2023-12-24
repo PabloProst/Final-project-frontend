@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './PageNavbar.css';
+import { registerUser } from '../../services/apiCalls';
 
 export const PageNavbar = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -21,9 +22,31 @@ export const PageNavbar = () => {
     setShowLogin(false);
   };
 
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+
+    const name = e.target.elements.name.value;
+    const username = e.target.elements.username.value;
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+
+    try {
+        const response = await registerUser({
+            name,
+            username,
+            email,
+            password,
+        });
+
+        console.log(response.data); 
+    } catch (error) {
+        console.error('Error during registration:', error);
+    }
+};
+
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="bg-warning navbar-design">
         <Container>
           <Navbar.Brand href="/">
             <img src='./src/assets/img/logo.png' alt='Logo' className='logo-navbar'></img>
@@ -66,6 +89,7 @@ export const PageNavbar = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className='offcanvas-design'>
+          <form onSubmit={handleRegisterSubmit}>
             <label htmlFor="name">Name:</label>
             <input type="text" id="name" name="name" />
             <label htmlFor="username">Username:</label>
@@ -77,6 +101,7 @@ export const PageNavbar = () => {
             <Button variant="primary" type="submit">
               Register
             </Button>
+            </form>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
